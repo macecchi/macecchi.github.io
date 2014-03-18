@@ -1,0 +1,52 @@
+body {
+	font-size: 13px;
+	font-family: Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+	line-height: 1.3em;
+	word-break: break-all;
+}
+
+input {
+	font: 11px "Menlo";
+}
+
+.welcome {
+
+}
+
+.response {
+	white-space: pre-wrap;
+}
+
+/* Theme: Homebrew */
+
+body.homebrew {
+	background: #111;
+	color: #00ff00;
+}
+
+.homebrew #cursor {
+	background: #00ff00;
+}
+
+.homebrew .welcome {
+	color: #fff;
+}
+.homebrew #fakeinput {
+	background: #111;
+	border-color: #111;
+	color: #00ff00;
+}
+
+/* Theme: Basic */
+
+body.basic {
+	color: #000;
+}
+
+.basic #cursor {
+	background: #000;
+}
+
+.basic .welcome {
+	color: #000;
+}
