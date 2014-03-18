@@ -1,6 +1,6 @@
 body {
 	font-size: 13px;
-	font-family: Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+	font-family: Monaco, Consolas, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
 	line-height: 1.3em;
 	word-break: break-all;
 }

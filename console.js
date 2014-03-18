@@ -203,7 +203,7 @@ You can find more about my projects on my Lattes CV or on my GitHub page.\n\n")}
 	
 	if (isMobile.any()) {
 		$("head").append("<meta content='width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' name='viewport'>\n<meta content='yes' name='apple-mobile-web-app-capable'>");
-		stdout("<span class=\"welcome\">\nPlease use your computer to access this website.</span>");
+		stdout("<span class=\"welcome\">\nPlease use your computer to access this website.\n</span>");
 		
 		//$('#fakeinput').focus().blur().focus();
 
