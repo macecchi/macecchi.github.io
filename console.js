@@ -109,11 +109,12 @@ You can find more about my projects on my Lattes CV or on my GitHub page.\n\n")}
 	});
 	
 	function update_line() {
-		if (!isMobile.any()) {
+		//if (!isMobile.any()) {
 			target_line.html(init_text + " " + command + "<span id=\"cursor\">" + cursor + "</span>");
-		} else {
-			target_line.html(init_text + " <input type=\"text\" id=\"fakeinput\" autocapitalize=\"off\" autocorrect=\"off\" placeholder=\"tap here to type\">");
-		}
+		//} else {
+			//target_line.html(init_text + " <input type=\"text\" id=\"fakeinput\" autocapitalize=\"off\" autocorrect=\"off\" placeholder=\"tap here to type\">");
+			//target_line.children().focus();
+		//}
 	}
 	
 	function new_line() {
@@ -147,7 +148,7 @@ You can find more about my projects on my Lattes CV or on my GitHub page.\n\n")}
 			default:
 				for (i=0; i < available_commands.length; i++) {
 					cmd = available_commands[i];
-					console.log(cmd);
+
 					if (cmd[0] == argv[0]) {
 						cmd[2]();
 						break;
@@ -202,7 +203,7 @@ You can find more about my projects on my Lattes CV or on my GitHub page.\n\n")}
 	
 	if (isMobile.any()) {
 		$("head").append("<meta content='width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' name='viewport'>\n<meta content='yes' name='apple-mobile-web-app-capable'>");
-		stdout("<span class=\"welcome\">\nNOTICE: This app probably won't work on your device.</span>");
+		stdout("<span class=\"welcome\">\nPlease use your computer to access this website.</span>");
 		
 		//$('#fakeinput').focus().blur().focus();
 
