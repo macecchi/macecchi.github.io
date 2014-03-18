@@ -6,26 +6,57 @@ $(document).ready(function() {
 	version = "0.2";
 	cursor = "&nbsp;";
 	default_theme = "homebrew";
-	welcome_text = "Welcome to meriw (version " + version + ")\nThis is the personal website Type 'help' for a list of available commands.";
+	welcome_text = "Welcome to meriw (version " + version + ")\n\This is the personal website of Mario Cecchi.\nEnter 'help' to view the menu.\n ";
+	
 	available_commands = new Array(
-	"about - About me",
-	"email - My email",
-	"projects - Projects and research",
-	"portfolio - Some of my works",
-	"facebook - My facebook profile",
-	"twitter - My twitter account",
-	"kpbr - Katy Perry Brasil",
-	"pd - Portal Duff",
-	"help - List of available commands",
-	"theme - Change the terminal theme",
-	"clear - Clear terminal screen",
-	"refresh - Reload terminal",
-	"reset - Reset preferences and reload terminal",
-	"whoami - View current user",
-	//"elisa",
-	//"gabi",
-	//"rubens",
-	"ping"
+		["about", "About me", function(){ stdout("Mario Cecchi.\n\
+21-year-old Computer Science student at the Federal University of Rio de Janeiro (UFRJ), Brazil.\n\
+I also work as a researcher at the Computational Intelligence Laboratory, UFRJ.\n\
+During the free time, I code and manage a few websites and some personal projects.\n\
+My biggest interest is programming, either in C, C++, Objective-C, Java, PHP, JavaScript or MATLAB.\n\
+\n\
+Please find more about what I do through the 'projects' menu.\n\n") }],
+		["email", "My email", function(){ stdout("Feel free to contact me at macecchi@gmail.com.") }],
+		["projects", "Projects and research", function() { stdout("\
+My projects at the moment are the following:\n\
+	LabicKinect: 3D environment mapping using Kinect\n\
+	Home automation with Raspberry Pi\n\
+\n\
+I'm also part of the team of the following websites, where I do all the coding:\n\
+	Katy Perry Brasil: http://www.katyperry.com.br/\n\
+	Hilary Duff Brasil: http://www.hilaryduff.com.br/\n\
+	Portal Focka: http://www.portalfocka.com.br/\n\
+\n\
+My research interests are computer vision, computational intelligence and software development.\n\
+\n\
+You can find more about my projects on my Lattes CV or on my GitHub page.\n\n")}],
+		["github", "My GitHub account", function() { redirect("https://github.com/macecchi"); }],
+		["lattes", "My Lattes CV", function() { redirect("http://lattes.cnpq.br/2694166859171258"); }],
+		["facebook", "My Facebook profile", function() { redirect("https://www.facebook.com/macecchi"); }],
+		["twitter", "My Twitter profile", function() { redirect("https://twitter.com/MarioCecchi"); }],
+		["theme", "Change the terminal theme", function() {
+			if (argc > 1) {
+					switch (argv[1]) {
+						case "homebrew":
+						case "basic":
+							$("body").removeClass();
+							$("body").addClass(argv[1]);
+							createCookie("meriw_theme", argv[1]);
+							break;
+						default:
+							stdout("Invalid theme option.");
+					}
+				} else {
+					stdout("usage: theme <THEME_NAME>\nAvailable themes:\n homebrew (default)\n basic");
+				}
+		}],
+		["clear", "Clear terminal screen", function() { target.empty(); }],
+		["refresh", "Reload terminal", function() { redirect(""); }],
+		["reset", "Reset terminal", function() { 
+			eraseCookie("meriw_theme");
+			redirect(""); }],
+		// ["exit", "Terminate session", exit],
+		["ip", "Current IP address", function() { stdout(my_ip()); }]
 	);
 	
 	target = $("#console");
@@ -106,90 +137,25 @@ $(document).ready(function() {
 			case "?":
 				help();
 				break;
-			case "email":
-				stdout("macecchi@gmail.com");
-				break;
-			case "about":
-				stdout("Mário Cecchi");
-				break;
-			case "elisa":
-				stdout("vai tomar no koo");
-				break;
-			case "gabi":
-				stdout("curte um mc xereca");
-				break;
-			case "rubens":
-				stdout("ama cavalos");
-				break;
-			case "kpbr":
-				redirect("http://www.katyperry.com.br/");
-				return;
-			case "pd":
-			case "hdbr":
-				redirect("http://www.hilaryduff.com.br/");
-				return;
-			case "facebook":
-				redirect("https://www.facebook.com/macecchi");
-				return;
-			case "twitter":
-				redirect("http://twitter.com/MarioCecchi");
-				return;
-			case "jonas":
-				redirect("http://meriw.com/22");
-				return;
-			case "projects":
-				stdout("Soon.");
-				break;
-			case "portfolio":
-				stdout("Soon.");
-				break;
-			case "ping":
-				stdout("Pong!");
-				break;
-			case "bye":
-				exit();
-				return;
-			case "whoami":
-				stdout(my_ip());
-				break;
-			case "welcome":
-				stdout("<span class=\"welcome\">" + welcome_text + "</span>");
-				break;
-			case "refresh":
-				redirect("");
-				return;
-			case "reset":
-				eraseCookie("meriw_theme");
-				redirect("");
-				return;
-			case "clear":
-				target.empty();
-				break;
-			case "theme":
-				if (argc > 1) {
-					switch (argv[1]) {
-						case "homebrew":
-						case "basic":
-							$("body").removeClass();
-							$("body").addClass(argv[1]);
-							createCookie("meriw_theme", argv[1]);
-							break;
-						default:
-							stdout("Invalid theme option.");
-					}
-				} else {
-					stdout("usage: theme THEME_NAME\nAvailable themes:\n homebrew (default)\n basic");
-				}
-				break;
 			case "cd":
 				if (argc > 1) {
 					redirect(argv[1]);
 					return;
 				}
-				stdout("usage: cd DIRECTORY");
+				stdout("usage: cd [DIRECTORY]");
 				break;
 			default:
-				stdout(command + ": command not found");
+				for (i=0; i < available_commands.length; i++) {
+					cmd = available_commands[i];
+					console.log(cmd);
+					if (cmd[0] == argv[0]) {
+						cmd[2]();
+						break;
+					}
+				}
+
+				if (i == available_commands.length)
+					stdout(command + ": command not found");
 		}
 		
 		prev_command = command;
@@ -204,20 +170,22 @@ $(document).ready(function() {
 	function help() {
 		stdout("Available commands:\n");
 		for (i=0; i<available_commands.length; i++) {
-			stdout("  " + available_commands[i] + "\n");
+			cmd = available_commands[i];
+			stdout("	" + cmd[0] + " - " + cmd[1] + "\n");
 		}
+		stdout("\n");
 		//stdout("Total: " + available_commands.length + "");
 	}
 	
 	function redirect(url) {
 		if (url == "") {
-			target.append("=> Reloading this page.");
+			stdout("=> Reloading this page.");
 			document.location.reload(true);
 		} else {
-			target.append("=> Redirecting to " + url + ". Loading.");
+			stdout("=> Redirecting to " + url + ". Loading...");
 			self.location.href = url;
 		}
-		setInterval(function() { target.append("."); }, 100);
+		// setInterval(function() { target.append("."); }, 100);
 	}
 	
 	function exit() {

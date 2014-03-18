@@ -10,7 +10,6 @@ input {
 }
 
 .welcome {
-
 }
 
 .response {
@@ -20,7 +19,7 @@ input {
 /* Theme: Homebrew */
 
 body.homebrew {
-	background: #111;
+	background: #222;
 	color: #00ff00;
 }
 
@@ -31,6 +30,11 @@ body.homebrew {
 .homebrew .welcome {
 	color: #fff;
 }
+
+.homebrew .response {
+	color: #f4ffc0;
+}
+
 .homebrew #fakeinput {
 	background: #111;
 	border-color: #111;
