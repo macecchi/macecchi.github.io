@@ -10,9 +10,9 @@ $(document).ready(function() {
 	
 	available_commands = new Array(
 		["about", "About me", function(){ stdout("Mario Cecchi.\n\
-21-year-old Computer Science student at the Federal University of Rio de Janeiro (UFRJ), Brazil.\n\
+22-year-old Computer Science student at the Federal University of Rio de Janeiro (UFRJ), Brazil.\n\
 I also work as a researcher at the Computational Intelligence Laboratory, UFRJ.\n\
-During the free time, I code and manage a few websites and some personal projects.\n\
+In my spare time, I code and manage a few websites and some personal projects.\n\
 My biggest interest is programming, either in C, C++, Objective-C, Java, PHP, JavaScript or MATLAB.\n\
 \n\
 Please find more about what I do through the 'projects' menu.\n\n") }],
@@ -22,7 +22,7 @@ My projects at the moment are the following:\n\
 	LabicKinect: 3D environment mapping using Kinect\n\
 	Home automation with Raspberry Pi\n\
 \n\
-I'm also part of the team of the following websites, where I do all the coding:\n\
+I'm also part of the team of the following websites, where I do all or most of the coding:\n\
 	Katy Perry Brasil: http://www.katyperry.com.br/\n\
 	Hilary Duff Brasil: http://www.hilaryduff.com.br/\n\
 	Portal Focka: http://www.portalfocka.com.br/\n\
