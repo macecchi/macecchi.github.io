@@ -1,58 +1,50 @@
-@import url(http://fonts.googleapis.com/css?family=Cousine:400,700);
+* { 
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
 
 body {
-	font-size: 13px;
-	font-family: Monaco, Consolas, 'Cousine', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace, serif;
-	line-height: 1.3em;
-	word-break: break-all;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Helvetica Neue",sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	background: #efefef;
 }
 
-input {
-	font: 11px "Menlo";
+a {
+	color: #222;
+	text-decoration: none;
 }
 
-.welcome {
+#icons {
+	height: 100%;
+	vertical-align: middle;
 }
 
-.response {
-	white-space: pre-wrap;
+#icons > ul {
+	list-style: none;
+	text-align: center;
+	display: block;
+	vertical-align: middle;
 }
 
-/* Theme: Homebrew */
-
-body.homebrew {
-	background: #222;
-	color: #00ff00;
+#icons > ul > li {
+	display: inline-block;
+	margin-right: 30px;
 }
 
-.homebrew #cursor {
-	background: #00ff00;
+#icons > ul > li:last-child {
+	margin-right: 0;
 }
 
-.homebrew .welcome {
-	color: #fff;
-}
-
-.homebrew .response {
-	color: #f4ffc0;
-}
-
-.homebrew #fakeinput {
-	background: #111;
-	border-color: #111;
-	color: #00ff00;
-}
-
-/* Theme: Basic */
-
-body.basic {
-	color: #000;
-}
-
-.basic #cursor {
-	background: #000;
-}
-
-.basic .welcome {
-	color: #000;
+#icons img {
+	width: 150px;
+	margin-bottom: 10px;
+	display: block;
+	vertical-align: middle;
 }

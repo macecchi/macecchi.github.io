@@ -1,4 +1,3 @@
-meriw.com
-==================
+# meriw.com
 
-Terminal emulator using jQuery for my personal website @ meriw.com.
+Very basic personal homepage containing social media links for [meriw.com](http://meriw.com).
