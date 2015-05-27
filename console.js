@@ -20,7 +20,7 @@ The code for this Terminal-style page is available on my GitHub at https://githu
 		["email", "My email", function(){ stdout("Feel free to contact me at macecchi@gmail.com.") }],
 		["projects", "Projects and research", function() { stdout("\
 Please refer to my GitHub page for information about my projects.\n\
-https://github.com/macecchi (or run 'github')\n")}],
+https://github.com/macecchi (or run	 'github')\n")}],
 		["github", "My GitHub account", function() { redirect("https://github.com/macecchi"); }],
 		["linkedin", "My Linkedin profile", function() { redirect("https://br.linkedin.com/pub/mario-cecchi-raduan/71/757/124"); }],
 		["lattes", "My Lattes CV", function() { redirect("http://lattes.cnpq.br/2694166859171258"); }],
@@ -29,6 +29,7 @@ https://github.com/macecchi (or run 'github')\n")}],
 		["theme", "Change the terminal theme", function() {
 			if (argc > 1) {
 					switch (argv[1]) {
+						case "solarized-dark":
 						case "homebrew":
 						case "basic":
 							$("body").removeClass();
