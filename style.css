@@ -56,3 +56,31 @@ body.basic {
 .basic .welcome {
 	color: #000;
 }
+
+
+/* Theme: Solarized Dark */
+
+body.solarized-dark {
+	background: #042029;
+	color: #708284;
+}
+
+.solarized-dark #cursor {
+	background: #708284;
+}
+
+.solarized-dark .welcome {
+	color: #708284;
+}
+
+.solarized-dark .user {
+	color: #00E5E5;
+}
+
+.solarized-dark .host {
+	color: #00D900;
+}
+
+.solarized-dark .path {
+	color: #E5E500;
+}
