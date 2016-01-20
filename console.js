@@ -3,20 +3,20 @@
 
 $(document).ready(function() {
 	init_text = '<span class="user">visitor</span>@<span class="host">meriw:</span><span class="path">/</span>$';
-	version = '0.3';
+	version = '0.4';
 	cursor = '&nbsp;';
 	default_theme = 'solarized-dark';
-	welcome_text = "Welcome to meriw (version " + version + ")\n\This is the personal website of Mario Cecchi.\nEnter 'help' to view the menu.\n ";
-	
+	welcome_text = "Welcome to meriw (version " + version + ")\n\This is the personal website of Mario Cecchi.\nEnter `help` or `ls` to view the menu.\n ";
+
 	available_commands = new Array(
 		["about", "About me", function(){ stdout("Mario Cecchi.\n\n\
-22-year-old Computer Science student at Federal University of Rio de Janeiro (UFRJ), Brazil.\n\
+23-year-old Computer Science student at Federal University of Rio de Janeiro (UFRJ), Brazil.\n\
 I also work as an undergraduate researcher at the Computational Intelligence Laboratory, UFRJ.\n\
-In my spare time, I code and manage a few websites and some personal projects.\n\
-My biggest interest is in mobile and web development.\n\
+In my spare time, I code and manage some personal project and a few websites.\n\
+My main interest is in mobile development.\n\
 \n\
 Please find more about what I do through the 'projects' menu.\n\n\
-The code for this Terminal-style page is available on my GitHub at https://github.com/macecchi/macecchi.github.io.\n") }],
+This Terminal-style page is open-source and available on GitHub at https://github.com/macecchi/macecchi.github.io.\n") }],
 		["email", "My email", function(){ stdout("Feel free to contact me at macecchi@gmail.com.") }],
 		["projects", "Projects and research", function() { stdout("\
 Please refer to my GitHub page for information about my projects.\n\
@@ -45,27 +45,27 @@ https://github.com/macecchi (or run	 'github')\n")}],
 		}],
 		["clear", "Clear terminal screen", function() { target.empty(); }],
 		["refresh", "Reload terminal", function() { redirect(""); }],
-		["reset", "Reset terminal", function() { 
+		["reset", "Reset terminal", function() {
 			eraseCookie("meriw_theme");
 			redirect(""); }],
-		// ["exit", "Terminate session", exit],
+		["exit", "Terminate session", exit],
 		["ip", "Current IP address", function() { stdout(my_ip()); }]
 	);
-	
+
 	target = $("#console");
 	current_line = 0;
 	command = "";
 	prev_command = "";
 	available = true;
-		
+
 	$("body").keypress(function(event) {
 		//event.preventDefault();
-		if (!available) return;	
+		if (!available) return;
 		typed_char = String.fromCharCode(event.keyCode);
 		command = command.concat(typed_char);
 		update_line();
 	});
-	
+
 	$("body").keydown(function(event) {
 		if (!available) return;
 		switch (event.keyCode) {
@@ -100,12 +100,12 @@ https://github.com/macecchi (or run	 'github')\n")}],
 				//console.log(event.keyCode);
 		}
 	});
-	
+
 	function update_line() {
 		target_line.html(init_text + " " + command + "<span id=\"cursor\">" + cursor + "</span>");
 
 	}
-	
+
 	function new_line() {
 		$("#cursor").detach();
 		current_line++;
@@ -118,13 +118,16 @@ https://github.com/macecchi (or run	 'github')\n")}],
 	function eval_command() {
 		argv = command.split(" ");
 		argc = argv.length;
-		
+
 		switch (argv[0]) {
 			case "":
 				break;
 			case "help":
 			case "?":
 				help();
+				break;
+			case "ls":
+				ls();
 				break;
 			case "cd":
 				if (argc > 1) {
@@ -146,23 +149,31 @@ https://github.com/macecchi (or run	 'github')\n")}],
 				if (i == available_commands.length)
 					stdout(command + ": command not found");
 		}
-		
+
 		prev_command = command;
 		command = "";
 		new_line();
 	}
-	
+
 	function stdout(msg) {
 		target.append("<span class=\"response\">" + msg + "</span>");
 	}
-	
+
 	function help() {
 		stdout("Available commands:\n");
 		for (i=0; i<available_commands.length; i++) {
 			cmd = available_commands[i];
 			stdout("	" + cmd[0] + " - " + cmd[1] + "\n");
-		}	}
-	
+		}
+	}
+
+		function ls() {
+			for (i=0; i<available_commands.length; i++) {
+				cmd = available_commands[i];
+				stdout(cmd[0] + '\n');
+			}
+		}
+
 	function redirect(url) {
 		if (url == "") {
 			stdout("=> Reloading this page.");
@@ -170,24 +181,25 @@ https://github.com/macecchi (or run	 'github')\n")}],
 		} else {
 			stdout("=> Redirecting to " + url + ". Loading...");
 			self.location.href = url;
-		}	}
-	
+		}
+	}
+
 	function exit() {
 		stdout("Goodbye!");
 		available = false;
 		$("#cursor").detach();
 		setTimeout(function() { window.close() }, 1000);
 	}
-		
+
 	// Init
 	theme = (readCookie("meriw_theme") != null) ? readCookie("meriw_theme") : default_theme;
 	$("body").addClass(theme);
 	stdout("<span class=\"welcome\">" + welcome_text + "</span>");
-	
+
 	if (isMobile.any()) {
 		$("head").append("<meta content='width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' name='viewport'>\n<meta content='yes' name='apple-mobile-web-app-capable'>");
 		stdout("<span class=\"welcome\">\nPlease use your computer to access this website.\n</span>");
-		
+
 	}
 
 	new_line();
